@@ -337,7 +337,7 @@ const Upload = () => {
                     </div>
                   </div>
                   <button
-                    onClick={() => handleDeleteDocument(doc.id)}
+                    onClick={() => handleDeleteDocument(doc._id)}
                     disabled={isDeleting}
                     className="text-red-600 hover:text-red-800 p-1 disabled:opacity-50"
                   >

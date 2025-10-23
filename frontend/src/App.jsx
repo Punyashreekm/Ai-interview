@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router";
 import { Toaster } from "react-hot-toast";
 import Landing from "./pages/Landing.jsx";
 import Login from "./pages/Login.jsx";

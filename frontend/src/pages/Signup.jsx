@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router";
 import { useSignupMutation } from "../store/api/apiSlice";
 import { Eye, EyeOff, Brain } from "lucide-react";
 import toast from "react-hot-toast";

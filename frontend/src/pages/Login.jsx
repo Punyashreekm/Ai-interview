@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router";
 import { useLoginMutation } from "../store/api/apiSlice";
 import { Eye, EyeOff, Brain } from "lucide-react";
 import toast from "react-hot-toast";
@@ -11,7 +11,8 @@ const Login = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
 
-  const [loginMutation, { isLoading: loading }] = useLoginMutation();
+  const [loginMutation, { isLoading: loading, isSuccess, error }] =
+    useLoginMutation();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -21,6 +22,12 @@ const Login = () => {
     });
   };
 
+  useEffect(() => {
+    if (isSuccess) {
+      navigate("/upload");
+      toast.success("Login successful!");
+    }
+  }, [isSuccess, navigate]);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -32,9 +39,6 @@ const Login = () => {
 
       // Store token in localStorage
       localStorage.setItem("token", result.token);
-
-      toast.success("Login successful!");
-      navigate("/upload");
     } catch (error) {
       const errorMessage =
         error.data?.message || "Login failed. Please try again.";

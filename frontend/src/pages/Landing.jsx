@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { useAuth } from "../hooks/useAuth";
 import { User, Brain, FileText, MessageCircle } from "lucide-react";
 

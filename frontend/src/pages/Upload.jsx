@@ -85,7 +85,11 @@ const Upload = () => {
       clearInterval(progressInterval);
       setUploadProgress(100);
 
-      toast.success(`${documentType === 'resume' ? 'Resume' : 'Job description'} uploaded and processed successfully!`);
+      toast.success(
+        `${
+          documentType === "resume" ? "Resume" : "Job description"
+        } uploaded and processed successfully!`
+      );
 
       setTimeout(() => {
         setUploading(false);
@@ -102,7 +106,7 @@ const Upload = () => {
 
   // Create separate dropzone configurations
   const resumeDropzone = useDropzone({
-    onDrop: (files) => onDrop(files, 'resume'),
+    onDrop: (files) => onDrop(files, "resume"),
     accept: {
       "application/pdf": [".pdf"],
     },
@@ -111,7 +115,7 @@ const Upload = () => {
   });
 
   const jobDescriptionDropzone = useDropzone({
-    onDrop: (files) => onDrop(files, 'job_description'),
+    onDrop: (files) => onDrop(files, "job_description"),
     accept: {
       "application/pdf": [".pdf"],
     },
@@ -177,32 +181,35 @@ const Upload = () => {
           </p>
         </div>
 
-
         {/* Upload Areas */}
         <div className="grid md:grid-cols-2 gap-6 mb-8">
           {/* Resume Upload */}
           <div className="card">
             <div className="flex items-center mb-4">
               <FileText className="h-6 w-6 text-primary-600 mr-2" />
-              <h3 className="text-lg font-semibold text-gray-900">Upload Resume</h3>
+              <h3 className="text-lg font-semibold text-gray-900">
+                Upload Resume
+              </h3>
               {status.hasResume && (
                 <CheckCircle className="h-5 w-5 text-green-500 ml-auto" />
               )}
             </div>
-            
+
             <div
               {...resumeDropzone.getRootProps()}
               className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors ${
                 resumeDropzone.isDragActive
                   ? "border-primary-500 bg-primary-50"
                   : "border-gray-300 hover:border-primary-400"
-              } ${uploading && uploadingType === 'resume' ? "opacity-50 cursor-not-allowed" : ""} ${
-                status.hasResume ? "border-green-300 bg-green-50" : ""
-              }`}
+              } ${
+                uploading && uploadingType === "resume"
+                  ? "opacity-50 cursor-not-allowed"
+                  : ""
+              } ${status.hasResume ? "border-green-300 bg-green-50" : ""}`}
             >
               <input {...resumeDropzone.getInputProps()} />
               <UploadIcon className="h-10 w-10 text-gray-400 mx-auto mb-3" />
-              {uploading && uploadingType === 'resume' ? (
+              {uploading && uploadingType === "resume" ? (
                 <div>
                   <p className="text-sm font-medium text-gray-900 mb-2">
                     Processing resume...
@@ -222,9 +229,7 @@ const Upload = () => {
                   <p className="text-sm font-medium text-green-700 mb-1">
                     Resume uploaded successfully
                   </p>
-                  <p className="text-xs text-green-600">
-                    Click to replace
-                  </p>
+                  <p className="text-xs text-green-600">Click to replace</p>
                 </div>
               ) : (
                 <div>
@@ -245,25 +250,31 @@ const Upload = () => {
           <div className="card">
             <div className="flex items-center mb-4">
               <FileText className="h-6 w-6 text-primary-600 mr-2" />
-              <h3 className="text-lg font-semibold text-gray-900">Upload Job Description</h3>
+              <h3 className="text-lg font-semibold text-gray-900">
+                Upload Job Description
+              </h3>
               {status.hasJobDescription && (
                 <CheckCircle className="h-5 w-5 text-green-500 ml-auto" />
               )}
             </div>
-            
+
             <div
               {...jobDescriptionDropzone.getRootProps()}
               className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors ${
                 jobDescriptionDropzone.isDragActive
                   ? "border-primary-500 bg-primary-50"
                   : "border-gray-300 hover:border-primary-400"
-              } ${uploading && uploadingType === 'job_description' ? "opacity-50 cursor-not-allowed" : ""} ${
+              } ${
+                uploading && uploadingType === "job_description"
+                  ? "opacity-50 cursor-not-allowed"
+                  : ""
+              } ${
                 status.hasJobDescription ? "border-green-300 bg-green-50" : ""
               }`}
             >
               <input {...jobDescriptionDropzone.getInputProps()} />
               <UploadIcon className="h-10 w-10 text-gray-400 mx-auto mb-3" />
-              {uploading && uploadingType === 'job_description' ? (
+              {uploading && uploadingType === "job_description" ? (
                 <div>
                   <p className="text-sm font-medium text-gray-900 mb-2">
                     Processing job description...
@@ -283,9 +294,7 @@ const Upload = () => {
                   <p className="text-sm font-medium text-green-700 mb-1">
                     Job description uploaded successfully
                   </p>
-                  <p className="text-xs text-green-600">
-                    Click to replace
-                  </p>
+                  <p className="text-xs text-green-600">Click to replace</p>
                 </div>
               ) : (
                 <div>

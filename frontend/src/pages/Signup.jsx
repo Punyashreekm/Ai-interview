@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useSignupMutation } from "../store/api/apiSlice";
 import { Eye, EyeOff, Brain } from "lucide-react";
@@ -14,7 +14,8 @@ const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const [signupMutation, { isLoading: loading }] = useSignupMutation();
+  const [signupMutation, { data, isLoading: loading, isSuccess }] =
+    useSignupMutation();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -23,6 +24,14 @@ const Signup = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      localStorage.setItem("token", data?.token);
+      toast.success("Account created successfully!");
+      navigate("/upload");
+    }
+  }, [isSuccess, navigate, data]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,10 +54,7 @@ const Signup = () => {
       }).unwrap();
 
       // Store token in localStorage
-      localStorage.setItem("token", result.token);
-
-      toast.success("Account created successfully!");
-      navigate("/upload");
+      // localStorage.setItem("token", result.token);
     } catch (error) {
       const errorMessage =
         error.data?.message || "Signup failed. Please try again.";
